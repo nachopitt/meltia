@@ -1,0 +1,32 @@
+# =============================================================================
+# PRODUCTION override — merged on top of docker-compose.yml.
+#
+# On the server, set this once in /opt/meltia/.env:
+#   COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+# Then `docker compose up -d`, `docker compose logs -f app`, etc. all target
+# production without any -f flags.
+#
+# This file only lists what is DIFFERENT in prod: pull the prebuilt images
+# from the container registry (no local build) and publish the web port.
+#
+# The web container is published on 127.0.0.1:8080 (loopback only), NOT 0.0.0.0:80.
+# A host reverse proxy terminates TLS on 443/80 and proxies to 127.0.0.1:8080.
+# =============================================================================
+services:
+  app:
+    image: ${CONTAINER_REGISTRY:-ghcr.io/nachopitt}/meltia-app:${IMAGE_TAG:-latest}
+    restart: always
+    env_file:
+      - .env
+
+  web:
+    image: ${CONTAINER_REGISTRY:-ghcr.io/nachopitt}/meltia-web:${IMAGE_TAG:-latest}
+    restart: always
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:80"
+
+  db:
+    restart: always
+
+  redis:
+    restart: always

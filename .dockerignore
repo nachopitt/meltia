@@ -1,0 +1,37 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Dependencies (installed inside image during build)
+/node_modules
+/.npm
+
+# Build artifacts (generated inside image)
+/dist
+/.medusa
+/.vite
+/build
+
+# Local environment & secrets — never ship these into an image
+.env
+.env.*
+!.env.example
+
+# Tooling, CI, docs, and compose files (not needed at runtime)
+/.github
+/tests
+docker-compose*.yml
+README.md
+CLAUDE.md
+AGENTS.md
+
+# Editor / OS noise
+.idea
+.vscode
+.DS_Store
+*.log
+
+# Exclude git-keep files in certificates directory from build context
+docker/certs/.gitignore
+docker/certs/.gitkeep

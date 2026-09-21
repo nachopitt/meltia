@@ -1,0 +1,81 @@
+# =============================================================================
+# BASE configuration — shared by every environment.
+#
+# Do NOT run this file on its own. It only describes the *structure* that is
+# common to dev and prod (services, network, volume). Each environment adds
+# its own thin override on top:
+#
+#   dev  ->  docker-compose.yml + docker-compose.dev.yml
+#   prod ->  docker-compose.yml + docker-compose.prod.yml
+#
+# You normally never type the file names: set COMPOSE_FILE in your .env once
+# (see .env.example) and then just run `docker compose up -d`.
+# =============================================================================
+services:
+  # MedusaJS Node application (image/build is defined per-environment)
+  app:
+    container_name: meltia-app
+    restart: unless-stopped
+    networks:
+      - meltia
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # Nginx web server / reverse proxy (image/build is defined per-environment)
+  web:
+    container_name: meltia-web
+    restart: unless-stopped
+    networks:
+      - meltia
+    depends_on:
+      - app
+
+  # PostgreSQL database
+  db:
+    image: postgres:16-alpine
+    container_name: meltia-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-meltia}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - meltia-postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - meltia
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-meltia}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # Redis cache / event bus / queue
+  redis:
+    image: redis:7-alpine
+    container_name: meltia-redis
+    restart: unless-stopped
+    volumes:
+      - meltia-redis-data:/data
+    networks:
+      - meltia
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+networks:
+  meltia:
+    driver: bridge
+
+volumes:
+  meltia-postgres-data:
+    driver: local
+  meltia-redis-data:
+    driver: local

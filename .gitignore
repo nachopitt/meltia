@@ -42,3 +42,8 @@ lerna-debug.log*
 docker/certs/*
 !docker/certs/.gitignore
 !docker/certs/.gitkeep
+
+# Build & Cache
+.next/
+.turbo/
+*.tsbuildinfo

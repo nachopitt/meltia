@@ -42,18 +42,28 @@ RUN if id -u node >/dev/null 2>&1; then deluser --remove-home node; fi && \
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
+COPY apps/backend/package.json ./apps/backend/
+COPY apps/storefront/package.json ./apps/storefront/
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 # =============================================================================
 # Stage: builder
-# Builds Medusa backend and Vite storefront assets
+# Builds Medusa backend and storefront assets
 # =============================================================================
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+ARG NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_test
+ARG NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
+ARG NEXT_PUBLIC_BASE_URL=http://localhost:8080
+ENV NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=${NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY}
+ENV NEXT_PUBLIC_MEDUSA_BACKEND_URL=${NEXT_PUBLIC_MEDUSA_BACKEND_URL}
+ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+
 # Run build scripts if defined
-RUN npm run build --if-present && npm run build:storefront --if-present
+RUN npm run build --if-present
 
 # =============================================================================
 # Stage: prod
@@ -91,7 +101,7 @@ WORKDIR /app
 COPY docker/node/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 9000 5173
+EXPOSE 9000 5173 8000
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["npm", "run", "dev"]

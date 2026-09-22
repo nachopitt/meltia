@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp"
+      ]
+    },
+    "medusa": {
+      "type": "http",
+      "url": "https://docs.medusajs.com/mcp"
+    }
+  }
+}

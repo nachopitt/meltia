@@ -1,14 +1,10 @@
 import { getLocaleHeader } from "@lib/util/get-locale-header"
 import Medusa, { FetchArgs, FetchInput } from "@medusajs/js-sdk"
 
-// In server context (SSR / API routes / Docker), route internally to backend service
-let MEDUSA_BACKEND_URL = "http://localhost:9000"
-
-if (typeof window === "undefined" && process.env.MEDUSA_BACKEND_URL) {
-  MEDUSA_BACKEND_URL = process.env.MEDUSA_BACKEND_URL
-} else if (process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
-  MEDUSA_BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
-}
+const MEDUSA_BACKEND_URL =
+  process.env.MEDUSA_BACKEND_URL ||
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ||
+  "http://localhost:8080"
 
 export const sdk = new Medusa({
   baseUrl: MEDUSA_BACKEND_URL,

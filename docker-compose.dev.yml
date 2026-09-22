@@ -92,7 +92,8 @@ services:
       - .env
     environment:
       - MEDUSA_BACKEND_URL=http://app:9000
-      - NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
+      - NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:8080
+      - NEXT_PUBLIC_BASE_URL=http://localhost:8080
       - NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_e948efee71591f079be63002159c43bc8a560fdc738a3d0afa0cb3b3021d9361
     volumes:
       - .:/app

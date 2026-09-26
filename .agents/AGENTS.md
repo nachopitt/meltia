@@ -58,7 +58,7 @@
    - **E-Commerce & High-Craft UI**: [`b2b-saas-craft`](.agents/skills/b2b-saas-craft/SKILL.md) — High-density product tables, checkout flows, semantic tokens, tabular figures.
    - **Responsive Layouts & Components**: [`responsive-container-queries`](.agents/skills/responsive-container-queries/SKILL.md) & [`tailwindcss-development`](.agents/skills/tailwindcss-development/SKILL.md) — `@container` queries, multi-viewport layout validation.
    - **Milestone Orchestration**: [`milestone-task-orchestrator`](.agents/skills/milestone-task-orchestrator/SKILL.md) — 30–50 step budgets, tracker receipts, single-milestone bounded handoffs.
-   - **Git Hygiene & Commit Limits**: [`git-commit-discipline`](.agents/skills/git-commit-discipline/SKILL.md) — User staging ownership, hard $\le 50$ char subject formula, $\le 72$ body wrapping.
+   - **Git Hygiene & Commit Limits**: [`git-commit-discipline`](.agents/skills/git-commit-discipline/SKILL.md) — User staging ownership, hard $\le 50$ char subject formula, $\le 72$ body wrapping, zero CLI command form suggestions.
    - **Instructions Hygiene**: [`instructions-hygiene`](.agents/skills/instructions-hygiene/SKILL.md) — Byte-for-byte synchronization between `.agents/AGENTS.md` and `.github/copilot-instructions.md`.
 
 5. **Workspace File Creation & Native Tool Invariants**:

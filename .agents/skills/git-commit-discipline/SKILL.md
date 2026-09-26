@@ -19,6 +19,7 @@ This skill establishes the repository's git hygiene, commit message formatting, 
 > AI agents NEVER execute write operations on Git.
 
 - **Zero Git Write Execution**: NEVER run `git add`, `git commit`, `git push`, `git checkout`, `git branch`, `git reset`, or `git restore`.
+- **Zero CLI Command Snippets**: NEVER output `git commit -m ...`, shell scripts, or command-line wrappers when proposing commit messages. The user commits through their own tooling (IDE GUI, interactive editor `git commit`, or custom aliases). Present ONLY the raw, formatted commit text block.
 - **Zero Trailing Prompts for Git Execution**: NEVER ask the user if you should run `git add` or `git commit` on their behalf. Staging and committing is strictly the user's domain.
 - **Role on Commit Prompts**: When the user requests a commit (e.g. typing `git commit`, `commit`, or `/commit`), your ONLY task is to:
   1. Inspect `git status` AND `git diff --cached` (read-only).
@@ -66,6 +67,7 @@ Signed-off-by: <Name> <email>
 - Focus on **why** and non-obvious context, not line-by-line restatements of code diffs.
 - Hard wrap every body line to strictly $\le 72$ characters.
 
-### 4. Output Cleanliness (Zero Wrapper)
-- Output the commit message inside a clean, copyable code block (`gitcommit` or `text`).
-- Do NOT output extraneous preambles (e.g. *"Proposed commit message..."*), summaries, or bash execution instructions (`git commit -m "..."`) unless explicitly requested.
+### 4. Output Cleanliness (Zero Wrapper & Zero CLI Snippet)
+- Output ONLY the commit message inside a single copyable block (`text`).
+- NEVER output `git commit -m "..."`, shell blocks, or command invocations under any circumstance.
+- Do NOT output extraneous preambles (e.g. *"Proposed commit message..."*), summaries, decorations, or bash instructions unless explicitly requested.

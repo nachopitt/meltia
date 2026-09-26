@@ -47,3 +47,6 @@ docker/certs/*
 .next/
 .turbo/
 *.tsbuildinfo
+
+# Telemetry artifacts
+.github/context-mode/

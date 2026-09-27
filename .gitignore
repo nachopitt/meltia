@@ -5,6 +5,7 @@ node_modules/
 
 # Testing & Coverage
 coverage/
+screenshots/
 
 # Production & Build outputs
 dist/

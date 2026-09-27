@@ -36,9 +36,15 @@
 - **Service Boundaries**:
   - Custom module `src/modules/blindbox`.
   - Backend API routes: `src/api/store/customizer/*` and `src/api/admin/blindbox/*`.
+- **Storefront Architecture**:
+  - Migrated from Next.js 15 App Router to **Vue 3 + Vite 6 + Pinia + Vue Router + Tailwind CSS + `@medusajs/js-sdk`**.
+  - Dev server boots in 566ms (vs 10s Turbopack JIT in Docker).
+  - Headless Playwright visual capture verified across 1440px Desktop, 1024px Laptop, 768px Tablet, and 390px Mobile with 0 console errors.
+  - Production build: `dist/index.html` (0.87 kB), `dist/assets/index.js` (265 kB gzipped: 95 kB) in 7.38s.
 - **Infrastructure**:
   - Pure containerized execution via `docker compose exec -T workspace`.
-  - Nginx gateway on port 8080 routing to Medusa (9000) and Next.js Storefront (5173).
+  - Nginx gateway on port 8080 routing to Medusa (9000) and Storefront (5173).
+  - Path boundary `^/(admin|store|auth|custom|health|app)(/|$)` ensures `/customizer` SPA routes properly to Vite.
 
 ---
 

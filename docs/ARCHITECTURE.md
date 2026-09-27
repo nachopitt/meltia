@@ -122,3 +122,29 @@ location / {
 ```
 
 The strict path boundary `(/|$)` ensures routes like `/customizer` route directly to the storefront SPA rather than matching backend prefixes.
+
+---
+
+## 6. Storefront Internationalization (i18n) Architecture
+
+Meltia adopts a zero-dependency, single-key JSON internationalization architecture inspired by the Apex standard:
+
+1. **Source of Truth (`apps/storefront/src/lang/*.json`)**:
+   - Flat single-key JSON dictionaries (`en.json` base, `es.json` target).
+   - Base dictionary purity: In `en.json`, key equals value (`enDict[k] === k`).
+   - Parameter interpolation: `:param` tokens for dynamic value substitution.
+
+2. **Frontend Composable Layer (`src/composables/`)**:
+   - **`useI18n.ts`**: Reactive `$t(key, params)` helper with browser language detection, `localStorage` persistence (`meltia_locale`), and Vue Router query synchronization (`?lang=es`).
+   - **`useCurrency.ts`**: Localized currency formatting (`formatCurrency`) standardizing amounts with `Intl.NumberFormat`, supporting locale resolution (`es-MX` vs `en-US`) and default currency (`MXN`).
+   - **`useDateTime.ts`**: Localized date, time, and relative formatting (`formatDate`, `formatDateTime`, `formatRelative`) powered by browser-native `Intl.DateTimeFormat` and `Intl.RelativeTimeFormat`.
+
+3. **Rich Translation Component (`<I18nT>`)**:
+   - `apps/storefront/src/components/I18nT.vue`: Splits strings on `{token}` boundaries and renders corresponding `<template #token>` slots, preventing phrase fragmentation across differing language grammar.
+
+4. **Static Literal Invariant & Tooling**:
+   - Dynamic `$t(variable)` expressions are forbidden. All keys are declared statically (e.g. `computed(() => $t('Literal'))`).
+   - `scripts/extract-t-keys.mjs`: CLI scanner supporting `--check`, `--fix`, `--prune`, `--json` to ensure 0 missing keys and alphabetic ordering.
+
+5. **CI & Verification Guardrails**:
+   - `apps/backend/src/__tests__/i18n.unit.spec.ts`: Jest unit test verifying that `scripts/extract-t-keys.mjs --check` passes, dictionaries exist, are non-empty, sorted alphabetically, 100% key-for-key symmetrical, and base purity holds.

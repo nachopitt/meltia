@@ -49,11 +49,20 @@ docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit
 
 # Packaging Dieline & Companion Trading Card Compositor tests (Milestone 2)
 docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest src/modules/blindbox/__tests__/dieline-compositor.unit.spec.ts"
+
+# i18n Dictionary Symmetry & Extraction Automation tests
+docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest src/__tests__/i18n.unit.spec.ts"
 ```
 The dieline compositor unit suite validates:
 - Folding box geometry (80x120x60mm net with 15° glue tab bevels and locking tabs).
 - English print legends and typography (`GLUE TAB`, `Cut Line`, `Fold Crease`, `ETERNAL MOMENTS`).
 - 2-up trading card dimensions (63x88mm companion cards) with dual-sided English authenticity certificates.
+
+The i18n unit suite validates:
+- `scripts/extract-t-keys.mjs --check` runs cleanly and exits with code 0.
+- Dictionaries `en.json` and `es.json` exist, are non-empty, and alphabetically sorted.
+- 100% key-for-key symmetry between `en.json` and `es.json`.
+- Base dictionary purity (`en.json` keys equal their values).
 
 ### Tier 2: Module & HTTP Integration
 Runs against the live containerized PostgreSQL and Redis instances:

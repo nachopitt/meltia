@@ -14,9 +14,11 @@ import {
   ShoppingBag,
   Wand2
 } from "lucide-vue-next"
+import { useCurrency } from "@/composables/useCurrency"
 
 const store = useCustomizerStore()
 const { $t } = useI18n()
+const { formatCurrency } = useCurrency()
 
 const categories = computed(() => [
   { key: "man" as const, label: $t("man") },
@@ -106,7 +108,7 @@ function triggerAiScene() {
         </div>
         <div class="text-right">
           <div class="text-xs uppercase tracking-wider text-neutral-400 font-semibold">{{ $t('Estimated Total') }}</div>
-          <div class="text-2xl font-serif font-bold text-amber-400">${{ store.totalPrice }} MXN</div>
+          <div class="text-2xl font-serif font-bold text-amber-400">{{ formatCurrency(store.totalPrice) }}</div>
         </div>
       </div>
 
@@ -405,7 +407,7 @@ function triggerAiScene() {
           <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6 mb-6">
             <div class="flex justify-between items-center mb-2">
               <span class="text-sm text-neutral-200">{{ $t('1x Collectible Blind Box (:title)', { title: store.collectionTitle }) }}</span>
-              <span class="font-serif font-bold text-amber-300">${{ store.totalPrice }} MXN</span>
+              <span class="font-serif font-bold text-amber-300">{{ formatCurrency(store.totalPrice) }}</span>
             </div>
             <p class="text-xs text-neutral-400">
               {{ $t('Includes custom author folding box + :count custom 3D chibi figures + companion trading card.', { count: 1 + store.rosterCharacters.length }) }}

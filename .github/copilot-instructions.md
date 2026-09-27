@@ -13,10 +13,18 @@
      `./scripts/check-agent-readiness.sh`
    - Review recent commits (`git log -n 5`) and active tracker file (`.github/issues/tracker_*.md`) before taking action.
    - **Atomic Turn Execution Invariant**: A task or implementation turn is NEVER complete until all relevant layers are updated together in the SAME turn:
-     1. **Code**: Medusa backend / Next.js storefront implementation.
+     1. **Code**: Medusa backend / Vue 3 storefront implementation.
      2. **Tests**: Matching Jest/Vitest/Playwright tests passing.
      3. **Database**: Migrations generated and applied if data models change (`docker compose exec -T workspace bash -c "cd /app/apps/backend && npx medusa db:generate <module> && npx medusa db:migrate"`).
-     4. **Documentation**: Canonical domain markdown files and the active PR/issue tracker (`.github/issues/tracker_*.md`).
+     4. **Documentation Synchronization Matrix**: Whenever changing code in a domain, update its canonical document in `docs/` in the same turn (audited via `./scripts/check-doc-sync.sh`):
+        | Domain Modified | Mandatory Synchronized Documents |
+        | :--- | :--- |
+        | Data models, migrations, seeders | `docs/DATABASE.md`, `docs/ARCHITECTURE.md` |
+        | Storefront views, stores, routing | `docs/ARCHITECTURE.md`, `docs/REQUIREMENTS.md` |
+        | Tests, test runners, visual scripts | `docs/TESTING.md` |
+        | Docker, Nginx, Compose, environment | `docs/ARCHITECTURE.md`, `docs/DEPLOYMENT.md`, `docs/DEBUGGING.md` |
+        | Workflows, steps, business logic | `docs/ARCHITECTURE.md`, `docs/REQUIREMENTS.md` |
+        | Milestone milestones & receipts | Active tracker (`.github/issues/tracker_*.md`) |
      5. **Frontend Visual Verification**: Whenever modifying or creating user-facing UI (pages, components, forms, dialogs/modals, navigation, cart, checkout), execute the headless Playwright visual capture loop across core viewports (1440px Desktop, 1024px Laptop, 768px Tablet, 390px Mobile) and inspect rendered screenshots using `view_file`.
 
 2. **Container Execution Invariant (CRITICAL)**:

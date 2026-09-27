@@ -18,6 +18,12 @@ REQUIRED_DOCS=(
     "docker-compose.prod.yml"
     ".agents/AGENTS.md"
     ".github/copilot-instructions.md"
+    "docs/ARCHITECTURE.md"
+    "docs/REQUIREMENTS.md"
+    "docs/DATABASE.md"
+    "docs/TESTING.md"
+    "docs/DEPLOYMENT.md"
+    "docs/DEBUGGING.md"
 )
 
 ALL_DOCS_FOUND=true
@@ -38,7 +44,7 @@ fi
 # 1.5 List available documentation
 echo ""
 echo "Discovered Project Documentation Files:"
-find . -maxdepth 2 -name "*.md" -not -path "*/node_modules/*" -not -path "*/.git/*" | sort | while read -r doc_file; do
+find . -maxdepth 3 -name "*.md" -not -path "*/node_modules/*" -not -path "*/.git/*" | sort | while read -r doc_file; do
     clean_path="${doc_file#./}"
     echo "  - $clean_path"
 done
@@ -58,6 +64,13 @@ echo ""
 if ! ./scripts/check-env-sync.sh; then
     echo "  [ERROR] Environment variables are out of sync. Please see errors above."
     exit 1
+fi
+
+# 2.6 Check documentation synchronization
+echo ""
+echo "Checking documentation synchronization against git diff..."
+if [ -f "./scripts/check-doc-sync.sh" ]; then
+    ./scripts/check-doc-sync.sh
 fi
 
 # 3. Check container status

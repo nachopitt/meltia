@@ -76,6 +76,22 @@ Business logic specific to Meltia's collectible blind box offering is encapsulat
 - **File-based routing**: Storefront endpoints live under `src/api/store/customizer/*`; back-office management endpoints live under `src/api/admin/blindbox/*`.
 - **Workflows over inline queries**: Route handlers delegate business logic to Medusa workflows (`src/workflows/`), ensuring transactional integrity and compensation rollback if steps fail.
 
+### 4.3. Packaging & Asset Compositor Engines
+- **Dieline Compositor (`DielineCompositor`)**:
+  - Implements 6-panel tuck box net geometry (Width 80mm, Height 120mm, Depth 60mm, Glue Tab 15mm, Dust Flaps 35mm, Tuck Flap 20mm).
+  - Exact die-cutting cut lines (`stroke="red"`), fold crease lines (`stroke="blue"` dashed with `stroke-dasharray="3,2"`).
+  - 15° bevel math on glue tab and dust flaps ($dx = H_{flap} \cdot \tan 15^\circ \approx 9.38\text{mm}$, $dy = G \cdot \tan 15^\circ \approx 4.02\text{mm}$).
+  - Locking bottom tongue with friction ears and locking slit.
+  - Supports both `roster_grid` (6-figure roster on back panel) and `dual_showcase` (lateral AI couple illustration, dedication letter, partner portrait on back).
+  - Generates resolution-independent, print-ready SVG with millimeter coordinates (315x300mm viewBox, 300 DPI ready).
+- **Trading Card Compositor (`TradingCardCompositor`)**:
+  - Renders 2-up companion trading card sheet (standard 63mm x 88mm cards, 3mm corner radius) on 154x108mm sheet.
+  - Card 1: Front decorative frame + character illustration + collection title ribbon + Meltia branding.
+  - Card 2: Back antique dedication parchment + dedication letter (dual showcase) or Certificate of Authenticity (roster grid).
+- **Asset Compilation Workflow (`generateDielineWorkflow`)**:
+  - Medusa v2 workflow orchestrating asset compilation from `CustomOrderSpec`.
+  - Atomic steps: `resolveDielineSpecStep`, `generateDielineAssetsStep`, `saveDielineAssetsStep` with rollback compensation.
+
 ---
 
 ## 5. Gateway & Networking (Nginx)

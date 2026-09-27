@@ -33,13 +33,17 @@ All tests must execute inside the designated Docker containers using the `-T` fl
   ```
 
 ### Tier 1: Backend Unit Isolation (Jest)
-Runs in-memory with mocked repositories or SQLite:
+Runs in-memory with mocked repositories or pure functions:
 ```bash
 docker compose exec -T workspace npm run test:unit
 ```
-To run a specific test file:
+To run specific unit test suites:
 ```bash
+# BlindBox Module Service entity CRUD tests
 docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest src/modules/blindbox/__tests__/service.unit.spec.ts"
+
+# Packaging Dieline & Companion Trading Card Compositor tests (Milestone 2)
+docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest src/modules/blindbox/__tests__/dieline-compositor.unit.spec.ts"
 ```
 
 ### Tier 2: Module & HTTP Integration

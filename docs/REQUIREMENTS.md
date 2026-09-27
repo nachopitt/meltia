@@ -71,8 +71,10 @@ The Medusa Admin dashboard provides tools to fulfill custom manufacturing orders
 
 - [x] **Milestone 1: Backend Domain Models & Catalog Seed**
   - Medusa v2 `blindbox` module, PostgreSQL migration, catalog seed (8 themes, 16 bodies), Jest unit tests.
-- [ ] **Milestone 2: Dieline PDF & Asset Generator Engine**
-  - Headless 300 DPI flat folding box dieline compositor and trading cards sheet generator.
+- [x] **Milestone 2: Dieline PDF & Asset Generator Engine**
+  - Headless 300 DPI flat folding box dieline compositor (`DielineCompositor` with 6-panel net geometry, 15° bevel tabs, dust flaps, locking bottom tongue, `roster_grid` and `dual_showcase` layouts).
+  - 2-up companion trading cards sheet generator (`TradingCardCompositor` with 63x88mm cards, front decorative frame, back dedication parchment).
+  - Medusa v2 workflow orchestration (`generateDielineWorkflow`).
 - [ ] **Milestone 3: AI Scene Synthesis & Dedication Engine**
   - Posed hugging illustration generation via Gemini/Imagen and contextual dedication copywriting.
 - [ ] **Milestone 4: Storefront Customizer Wizard**

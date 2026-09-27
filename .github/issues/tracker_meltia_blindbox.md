@@ -1,9 +1,9 @@
 # Issue Tracker: Meltia Collectible Blind Box E-Commerce Platform
 
-> **Status**: In Progress  
-> **Tracker File**: `.github/issues/tracker_meltia_blindbox.md`  
-> **Active Milestone**: Milestone 2 of 5  
-> **Last Updated**: 2026-09-26T09:55:00-06:00
+> **Status**: In Progress
+> **Tracker File**: `.github/issues/tracker_meltia_blindbox.md`
+> **Active Milestone**: Milestone 3 of 5
+> **Last Updated**: 2026-09-26T18:38:00-06:00
 
 ---
 
@@ -13,10 +13,11 @@
   - Custom Medusa v2 `blindbox` module (`BoxTheme`, `BodyCatalog`, `CustomOrderSpec`, `CustomFigure`).
   - Migrations generated and applied in Postgres (`Migration20260926144451`).
   - Seed 8 box themes and 16 base bodies (4 men, 4 women, 4 boys, 4 girls).
-- [ ] **Milestone 2: Dieline PDF & Asset Generator Engine** — ⏳ *Current Focus (Session 2)*
-  - High-res 300 DPI flat packaging dieline compositor (matching `IMG-20260908-WA0012.jpg` layout).
-  - Collectible companion trading cards compositor.
-- [ ] **Milestone 3: AI Scene Synthesis & Dedication Engine** — *Pending (Session 3)*
+- [x] **Milestone 2: Dieline PDF & Asset Generator Engine** — *Completed*
+  - High-res 300 DPI flat packaging dieline compositor (`DielineCompositor` with 6-panel net geometry, 15° bevel tabs, dust flaps, locking bottom tongue).
+  - Collectible companion trading cards compositor (`TradingCardCompositor` with 2-up 63x88mm sheet, front decorative frame, back dedication parchment).
+  - Medusa v2 workflow orchestration (`generateDielineWorkflow`).
+- [ ] **Milestone 3: AI Scene Synthesis & Dedication Engine** — ⏳ *Current Focus (Session 3)*
   - Posed couple/family hugging illustration generator for box side panel and trading cards.
   - Contextual dedication copy generator.
 - [ ] **Milestone 4: Storefront Customizer Wizard** — *Pending (Session 4)*
@@ -70,21 +71,39 @@
   - Structured `CustomOrderSpec` and `CustomFigure` as parent-child relationship with cascading foreign keys to support 1-to-many figures per blind box.
   - Explicit unique constraints on `slug` for themes and `code` for bodies to ensure idempotency.
 
+### Milestone 2: Dieline PDF & Asset Generator Engine
+- **Files Modified/Added**:
+  - `apps/backend/src/modules/blindbox/services/dieline-compositor.ts`: 6-panel tuck box geometry (80x120x60mm), 15° bevel tabs, dust flaps, locking bottom tongue, `roster_grid` and `dual_showcase` layouts, 300 DPI print-ready SVG generator.
+  - `apps/backend/src/modules/blindbox/services/trading-card-compositor.ts`: 2-up trading card sheet generator (63x88mm), front decorative frame, back dedication parchment / certificate.
+  - `apps/backend/src/workflows/generate-dieline-workflow.ts`: Medusa v2 workflow with steps `resolveDielineSpecStep`, `generateDielineAssetsStep`, `saveDielineAssetsStep`.
+  - `apps/backend/src/modules/blindbox/service.ts`: Exposed async compositor helpers on `BlindBoxModuleService`.
+  - `apps/backend/src/modules/blindbox/__tests__/dieline-compositor.unit.spec.ts`: Unit test suite (8 tests).
+  - `docs/ARCHITECTURE.md`, `docs/REQUIREMENTS.md`, `docs/TESTING.md`: Documentation synchronization.
+- **Verification Receipts**:
+  - `npm run test:unit`: 3 test suites passed, 15 tests passed total.
+  - `medusa lint`: 0 lint issues found.
+  - `check-doc-sync.sh`: Documentation synchronization audit passed.
+- **Decisions Made**:
+  - Pure vector SVG generation using millimeter units (1 SVG unit = 1mm). Eliminates binary dependencies (no Cairo, Sharp, or headless browser memory overhead on 1GB VPS).
+  - Implemented exact 15° bevel trigonometry on flaps ($dx = 35 \cdot \tan 15^\circ \approx 9.38\text{mm}$, $dy = 15 \cdot \tan 15^\circ \approx 4.02\text{mm}$) for clean die-cutting.
+  - Ensured all service methods are async and step IDs conform strictly to `@medusajs/eslint-plugin` rules.
+
 ---
 
-## 4. Active Task: Milestone 2 (Dieline PDF & Asset Generator Engine)
+## 4. Active Task: Milestone 3 (AI Scene Synthesis & Dedication Engine)
 
-- **Objective**: Implement the server-side packaging compositor engine that renders high-resolution 300 DPI flat folding box dielines and double-sided companion trading cards matching Diana's production files (`IMG-20260908-WA0012.jpg`).
+- **Objective**: Implement the server-side AI illustration generation engine (Gemini/Imagen prompt engineering for couple/family hugging illustration on lateral panel & trading cards) and contextual dedication copywriting:
+  - Gemini prompt synthesizer converting `CustomOrderSpec` + figure parameters into stylized chibi hugging illustrations.
+  - Contextual dedication copywriting assistant (emotional tone, relationship type, occasion).
 - **Step Budget**: ~30-50 steps (Max 80)
 - **Files to Modify/Create**:
-  - `apps/backend/src/modules/blindbox/services/dieline-compositor.ts`: Layout and canvas/vector renderer for 6-panel tuck box
-  - `apps/backend/src/modules/blindbox/services/trading-card-compositor.ts`: 2-up trading card sheet renderer
-  - `apps/backend/src/workflows/generate-dieline-workflow.ts`: Medusa workflow orchestrating asset compilation
-  - `apps/backend/src/modules/blindbox/__tests__/dieline-compositor.unit.spec.ts`: Unit tests validating dieline dimensions and panel placement
+  - `apps/backend/src/modules/blindbox/services/ai-scene-generator.ts`
+  - `apps/backend/src/workflows/generate-ai-scene-workflow.ts`
+  - `apps/backend/src/modules/blindbox/__tests__/ai-scene-generator.unit.spec.ts`
 - **Acceptance Criteria**:
-  1. Box dieline renderer produces valid 6-panel layout matching dimensions (Front, Back, Left Side, Right Side, Top Tuck, Bottom Tuck, Glue Tabs).
-  2. Trading card compositor produces double-sided companion cards matching proportions.
-  3. Compositor passes unit tests in `workspace` container.
+  1. AI scene synthesizer produces structured prompts and handles image generation/mock fallbacks.
+  2. Dedication copy generator supports tones and generates matching headline, body, and signature.
+  3. Passes unit tests and lint checks in `workspace` container.
 - **Verification Commands**:
   - `docker compose exec -T workspace npm run test:unit`
   - `docker compose exec -T workspace bash -c "cd /app/apps/backend && npm run lint"`
@@ -93,6 +112,8 @@
 
 ## 5. Discovered Quirks, Blockers & Lessons Learned
 - **DML Relations**: In Medusa v2, child entities in `model.hasMany` need inverse `model.belongsTo` on the child model pointing back to parent with `{ mappedBy: "figures" }`.
+- **Medusa Service Methods**: Public methods on Medusa service classes must be `async` (or return a `Promise`) to comply with `@medusajs/service-methods-must-be-async`.
+- **Workflow Step IDs**: Step IDs passed to `createStep` must match kebab-case of the variable name without trailing `-step` suffix (e.g. `createStep("resolve-dieline-spec", ...)` for `resolveDielineSpecStep`).
 
 ---
 

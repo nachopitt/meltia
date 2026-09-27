@@ -31,6 +31,11 @@ All tests must execute inside the designated Docker containers using the `-T` fl
   ```bash
   docker compose exec -T workspace bash -c "cd /app/apps/storefront && npm run build"
   ```
+- **i18n Translation Symmetry & Zero-Missing Audit**:
+  ```bash
+  docker compose exec -T workspace npm run i18n:check
+  ```
+  *Audit rule: 0 missing keys allowed, 100% key-for-key symmetry between `en.json` and `es.json`.*
 
 ### Tier 1: Backend Unit Isolation (Jest)
 Runs in-memory with mocked repositories or pure functions:

@@ -21,7 +21,11 @@
     "dev:backend": "turbo dev --filter=@dtc/backend",
     "dev:storefront": "turbo dev --filter=@dtc/storefront",
     "build:backend": "turbo build --filter=@dtc/backend",
-    "build:storefront": "turbo build --filter=@dtc/storefront"
+    "build:storefront": "turbo build --filter=@dtc/storefront",
+    "i18n:extract": "node scripts/extract-t-keys.mjs",
+    "i18n:fix": "node scripts/extract-t-keys.mjs --fix",
+    "i18n:prune": "node scripts/extract-t-keys.mjs --fix --prune",
+    "i18n:check": "node scripts/extract-t-keys.mjs --check"
   },
   "pnpm": {
     "overrides": {

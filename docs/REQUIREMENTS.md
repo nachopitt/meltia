@@ -67,6 +67,16 @@ The Medusa Admin dashboard provides tools to fulfill custom manufacturing orders
 
 ---
 
+## 3.5. Multilingual Internationalization (i18n) Support
+
+The storefront supports seamless multi-language browsing (English `en` and Spanish `es`):
+- **Zero Raw Text**: All user-facing UI copy wrapped in `$t('Literal Key')` or `<I18nT>`.
+- **Base & Target Symmetry**: Symmetrical dictionaries (`en.json` and `es.json`) audited via `node scripts/extract-t-keys.js --check`.
+- **Hybrid State Persistence**: Dual-synchronized locale management prioritizing URL parameters (`?lang=es`) with `localStorage` fallback for link sharing and return visits.
+- **Catalog Localization**: Packaging themes, body archetypes, and customizer options localize dynamically alongside static UI copy.
+
+---
+
 ## 4. Feature Roadmap & Milestones
 
 - [x] **Milestone 1: Backend Domain Models & Catalog Seed**

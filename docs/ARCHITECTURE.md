@@ -61,6 +61,11 @@ The storefront originally contemplated Next.js 15 App Router. That architecture 
 - **Styling**: Tailwind CSS with container queries (`@container`)
 - **Icons**: Lucide Icons (`lucide-vue-next`)
 - **Commerce Client**: `@medusajs/js-sdk` (configured with `publishableKey`)
+- **Internationalization (i18n)**:
+  - Zero-bloat composable architecture (`useI18n`) with dual-sync (URL `?lang=es` + `localStorage` persistence).
+  - Single-key `$t('Literal Key')` format with symmetrical dictionaries (`apps/storefront/src/lang/en.json`, `es.json`).
+  - Rich slot token interpolation component (`<I18nT>`).
+  - Automated AST/regex extraction and CI symmetry verification script (`scripts/extract-t-keys.js`).
 
 ---
 

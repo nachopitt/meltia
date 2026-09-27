@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useCustomizerStore } from "@/stores/customizer"
-import { Sparkles, Eye, RotateCw } from "lucide-vue-next"
+import { Sparkles } from "lucide-vue-next"
 
 const store = useCustomizerStore()
 const activeFace = ref<"front" | "left" | "right" | "back">("front")
@@ -13,7 +13,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
       <div class="flex items-center gap-2">
         <Sparkles class="w-4 h-4 text-amber-400" />
         <span class="text-xs uppercase tracking-widest font-semibold text-neutral-300">
-          Blind Box 3D Preview
+          {{ $t('Blind Box 3D Preview') }}
         </span>
       </div>
 
@@ -26,7 +26,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             activeFace === 'front' ? 'bg-amber-400/20 text-amber-300 font-medium' : 'text-neutral-400 hover:text-neutral-200'
           ]"
         >
-          Front
+          {{ $t('Front') }}
         </button>
         <button
           @click="activeFace = 'left'"
@@ -35,7 +35,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             activeFace === 'left' ? 'bg-amber-400/20 text-amber-300 font-medium' : 'text-neutral-400 hover:text-neutral-200'
           ]"
         >
-          AI Scene
+          {{ $t('AI Scene') }}
         </button>
         <button
           @click="activeFace = 'right'"
@@ -44,7 +44,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             activeFace === 'right' ? 'bg-amber-400/20 text-amber-300 font-medium' : 'text-neutral-400 hover:text-neutral-200'
           ]"
         >
-          Dedication
+          {{ $t('Dedication') }}
         </button>
         <button
           @click="activeFace = 'back'"
@@ -53,7 +53,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             activeFace === 'back' ? 'bg-amber-400/20 text-amber-300 font-medium' : 'text-neutral-400 hover:text-neutral-200'
           ]"
         >
-          Back
+          {{ $t('Back') }}
         </button>
       </div>
     </div>
@@ -72,11 +72,11 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
         <div class="relative z-10 text-center pt-2">
           <div class="inline-block bg-gradient-to-r from-amber-600 via-amber-400 to-amber-600 px-4 py-1 rounded-sm shadow-md border-y border-amber-200/50">
             <span class="font-serif font-black tracking-wider text-neutral-950 text-sm uppercase block truncate max-w-[190px]">
-              {{ store.collectionTitle || 'SERIES TITLE' }}
+              {{ store.collectionTitle || $t('SERIES TITLE') }}
             </span>
           </div>
           <span class="text-[8px] tracking-[0.2em] uppercase text-amber-300 font-bold block mt-0.5">
-            ✦ COLLECTIBLE BLIND BOX ✦
+            {{ $t('✦ COLLECTIBLE BLIND BOX ✦') }}
           </span>
         </div>
 
@@ -94,7 +94,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             <div class="text-[11px] font-bold text-neutral-100 font-serif">{{ store.mainCharacter.name }}</div>
             <div class="text-[9px] text-amber-400 font-mono">{{ store.mainCharacter.bodyCode }}</div>
             <div class="text-[8px] text-neutral-400 capitalize mt-0.5">
-              {{ store.mainCharacter.category }} · {{ store.mainCharacter.clothingFilament }}
+              {{ $t(store.mainCharacter.category) }} · {{ store.mainCharacter.clothingFilament }}
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
         <!-- Bottom Meltia Branding -->
         <div class="relative z-10 text-center pb-1">
           <span class="font-serif tracking-widest text-xs font-bold text-neutral-200">MELTIA</span>
-          <div class="text-[8px] tracking-widest uppercase text-amber-400/80 -mt-0.5 font-medium">Eternal Moments</div>
+          <div class="text-[8px] tracking-widest uppercase text-amber-400/80 -mt-0.5 font-medium">{{ $t('Eternal Moments') }}</div>
         </div>
       </template>
 
@@ -110,7 +110,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
       <template v-else-if="activeFace === 'left'">
         <div class="relative z-10 text-center pt-2">
           <span class="text-[9px] tracking-widest uppercase text-amber-300 font-bold block">
-            CUSTOM AI SCENE
+            {{ $t('CUSTOM AI SCENE') }}
           </span>
         </div>
         <div class="relative z-10 flex-1 flex flex-col items-center justify-center p-2">
@@ -119,13 +119,13 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             <div v-else class="flex flex-col items-center gap-2">
               <span class="text-4xl">✨</span>
               <p class="text-[10px] text-amber-200/90 font-serif leading-tight">
-                AI-generated illustration: Characters embracing in chibi blind box style
+                {{ $t('AI-generated illustration: Characters embracing in chibi blind box style') }}
               </p>
             </div>
           </div>
         </div>
         <div class="relative z-10 text-center pb-1 text-[8px] text-neutral-400">
-          Left Side Panel
+          {{ $t('Left Side Panel') }}
         </div>
       </template>
 
@@ -133,7 +133,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
       <template v-else-if="activeFace === 'right'">
         <div class="relative z-10 text-center pt-2">
           <h4 class="font-serif text-sm font-bold text-amber-300 leading-tight">
-            {{ store.dedicationHeadline || 'Dedication' }}
+            {{ store.dedicationHeadline || $t('Dedication') }}
           </h4>
         </div>
         <div class="relative z-10 flex-1 flex items-center justify-center p-3">
@@ -142,7 +142,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
           </p>
         </div>
         <div class="relative z-10 text-center pb-1 text-[8px] text-amber-400 font-serif">
-          ♥ With all my love ♥
+          {{ $t('♥ With all my love ♥') }}
         </div>
       </template>
 
@@ -150,7 +150,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
       <template v-else-if="activeFace === 'back'">
         <div class="relative z-10 text-center pt-2">
           <span class="text-[9px] tracking-widest uppercase text-amber-300 font-bold block">
-            COLLECTION · BLIND BOX SERIES
+            {{ $t('COLLECTION · BLIND BOX SERIES') }}
           </span>
         </div>
         <div class="relative z-10 flex-1 flex flex-col items-center justify-center my-1">
@@ -159,7 +159,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
             <div class="bg-neutral-950/60 border border-amber-400/20 rounded p-1.5 flex flex-col items-center text-center">
               <span class="text-lg">👤</span>
               <span class="text-[9px] font-bold text-neutral-100 truncate w-full">{{ store.mainCharacter.name }}</span>
-              <span class="text-[7px] text-amber-400">Lead</span>
+              <span class="text-[7px] text-amber-400">{{ $t('Lead') }}</span>
             </div>
             <!-- Extra figures -->
             <div
@@ -174,7 +174,7 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
           </div>
         </div>
         <div class="relative z-10 text-center pb-1 text-[8px] text-neutral-400">
-          {{ 1 + store.rosterCharacters.length }} Figures in this collection
+          {{ $t(':count Figures in this collection', { count: 1 + store.rosterCharacters.length }) }}
         </div>
       </template>
     </div>
@@ -185,8 +185,8 @@ const activeFace = ref<"front" | "left" | "right" | "back">("front")
         🃏
       </div>
       <div class="flex flex-col">
-        <span class="text-xs font-serif font-bold text-neutral-200">Collectible Trading Card Included</span>
-        <span class="text-[10px] text-amber-400/80">Double-sided print with exclusive artwork</span>
+        <span class="text-xs font-serif font-bold text-neutral-200">{{ $t('Collectible Trading Card Included') }}</span>
+        <span class="text-[10px] text-amber-400/80">{{ $t('Double-sided print with exclusive artwork') }}</span>
       </div>
     </div>
   </div>

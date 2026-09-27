@@ -10,8 +10,10 @@ const VIEWPORTS = [
 ]
 
 const ROUTES = [
-  { name: "home", path: "/" },
-  { name: "customizer", path: "/customizer" },
+  { name: "home-en", path: "/" },
+  { name: "home-es", path: "/?lang=es" },
+  { name: "customizer-en", path: "/customizer" },
+  { name: "customizer-es", path: "/customizer?lang=es" },
 ]
 
 const BASE_URL = process.env.TEST_BASE_URL || "http://web:80"

@@ -8,7 +8,7 @@ metadata:
 
 # Tiered Testing Pyramid & Verification Standard for Meltia
 
-This skill defines the token-optimized testing strategy and test-runner allocation model for Meltia (Node, MedusaJS 2.x, Next.js storefront, PostgreSQL, Playwright).
+This skill defines the token-optimized testing strategy and test-runner allocation model for Meltia (Node, MedusaJS 2.x, Vue 3 storefront, PostgreSQL, Playwright).
 
 ---
 

@@ -1,14 +1,14 @@
 ---
 name: bug-reproduction-protocol
-description: "Enforces the 5-step test-first reproduction and surgical resolution protocol for bugs, console errors, and SSR hydration issues. Activates when investigating, diagnosing, or fixing bugs, test failures, console warnings, or regressions."
+description: "Enforces the 5-step test-first reproduction and surgical resolution protocol for bugs, console errors, and regression issues. Activates when investigating, diagnosing, or fixing bugs, test failures, console warnings, or regressions."
 license: MIT
 metadata:
-  author: apex
+  author: meltia
 ---
 
 # Bug Reproduction Protocol (Reproduce-First Loop)
 
-This skill governs the systematic investigation, reproduction, and surgical remediation of software bugs, console warnings, regression failures, and SSR hydration errors.
+This skill governs the systematic investigation, reproduction, and surgical remediation of software bugs, console warnings, and regression failures across Medusa backend and Vue storefront.
 
 ---
 
@@ -32,9 +32,9 @@ flowchart TD
 ### Step 1: Reproduce First
 - Write or execute an automated test BEFORE modifying any application code.
 - Tool selection:
-  - **Browser runtime / console / hydration errors**: Use Playwright E2E with `page.on('console')`.
-  - **Backend logic / database / auth / policy**: Use Pest PHP.
-  - **Isolated utility functions / component state**: Use Vitest.
+  - **Browser runtime / console errors / visual regressions**: Use Playwright inside `playwright` container.
+  - **Backend logic / database / workflows / Medusa modules**: Use Jest unit or integration suites in `workspace`.
+  - **Storefront utility functions / Pinia stores / component state**: Use Vitest / Jest in `workspace`.
 
 ### Step 2: Capture & Confirm
 - Run the test in the appropriate Docker container (`workspace` or `playwright`).
@@ -44,9 +44,9 @@ flowchart TD
 ### Step 3: Root-Cause Analysis
 - Trace the root cause rather than patching symptoms.
 - Examples:
-  - SSR hydration warning $\rightarrow$ non-deterministic timestamp or DOM nesting error.
-  - 403 Forbidden $\rightarrow$ missing tenant scoping in Policy.
-  - `dragleave` loop $\rightarrow$ dynamic DOM overlays mounted under moving mouse pointer.
+  - SVG bounding box shift $\rightarrow$ trigonometry calculation error on flap bevels.
+  - 400 Bad Request on cart $\rightarrow$ invalid order spec payload schema or unhandled promise in workflow step.
+  - Reactivity defect $\rightarrow$ direct mutation of Pinia store state without reactive unwrapping.
 
 ### Step 4: Surgical Fix
 - Apply the minimal targeted diff (Ponytail discipline: fewest changed lines, zero unrequested refactoring).

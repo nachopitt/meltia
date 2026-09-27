@@ -1,6 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cinzel", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  --color-meltia-gold: #D4AF37;
+  --color-meltia-navy: #0a1128;
+  --color-meltia-dark: #050814;
+  --color-meltia-card: #121a36;
+  --color-meltia-border: #1f2b52;
+}
 
 @layer base {
   body {

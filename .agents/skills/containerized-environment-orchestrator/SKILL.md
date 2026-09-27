@@ -1,9 +1,9 @@
 ---
 name: containerized-environment-orchestrator
-description: "Manages safe containerized command execution, dynamic Docker Compose service discovery, internal/host network URL translation, and TTY handling. Activates when running terminal commands (PHP, Artisan, Composer, Node, npm, Vitest, Pest, Playwright), inspecting container logs, resolving application URLs, or interacting with docker-compose environments."
+description: "Manages safe containerized command execution, dynamic Docker Compose service discovery, internal/host network URL translation, and TTY handling. Activates when running terminal commands (Node, npm, npx medusa, turbo, jest, vitest, psql, playwright), inspecting container logs, resolving application URLs, or interacting with docker-compose environments."
 license: MIT
 metadata:
-  author: apex
+  author: meltia
 ---
 
 # Containerized Environment Orchestrator
@@ -15,7 +15,7 @@ This skill governs command execution, service routing, and network translation f
 ## 1. The Container Execution Invariant
 
 > [!CRITICAL]
-> **Zero Host Execution**: Never execute runtime commands (PHP, Composer, Artisan, Node, npm, Vitest, Pest, Playwright) directly on the host machine. All execution MUST target the designated Docker container via `docker compose exec -T`.
+> **Zero Host Execution**: Never execute runtime commands (Node, npm, npx medusa, turbo, jest, vitest, psql, playwright) directly on the host machine. All execution MUST target the designated Docker container via `docker compose exec -T`.
 
 ### Execution Rule
 ```bash
@@ -73,13 +73,13 @@ Projects in Docker have two distinct networking scopes:
 - Web server URL within the network: `http://web:80` (or `http://web`).
 - When running Playwright in the `playwright` container, always inject the internal URL:
   ```bash
-  docker compose exec -T -e APP_URL=http://web playwright npm run test:e2e -- <spec>
+  docker compose exec -T -e APP_URL=http://web playwright node scripts/capture-visuals.cjs
   ```
 
 ### 2. Host-Accessible URL (User Manual Verification)
 - When presenting verification instructions or links to the human user, use the host port mapped in `docker-compose.yml` (or `.env`):
-  - Check compose port mapping for `web` (e.g. `ports: - "${APP_PORT:-8082}:80"`).
-  - Public Host URL: `http://localhost:8082/<path>`.
+  - Check compose port mapping for `web` (e.g. `ports: - "${WEB_PORT:-8080}:80"`).
+  - Public Host URL: `http://localhost:8080/<path>`.
   - Never share internal container URLs (`http://web/...`) with the human user.
 
 ---

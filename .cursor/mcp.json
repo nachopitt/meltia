@@ -1,12 +1,16 @@
 {
-    "mcpServers": {
-        "laravel-boost": {
-            "command": "wsl.exe",
-            "args": [
-                "/usr/bin/php8.4",
-                "/home/nachopitt/apex/artisan",
-                "boost:mcp"
-            ]
-        }
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp"
+      ]
+    },
+    "medusa": {
+      "type": "http",
+      "url": "https://docs.medusajs.com/mcp"
     }
+  }
 }

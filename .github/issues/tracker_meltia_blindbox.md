@@ -17,13 +17,26 @@
   - High-res 300 DPI flat packaging dieline compositor (`DielineCompositor` with 6-panel net geometry, 15° bevel tabs, dust flaps, locking bottom tongue).
   - Collectible companion trading cards compositor (`TradingCardCompositor` with 2-up 63x88mm sheet, front decorative frame, back dedication parchment).
   - Medusa v2 workflow orchestration (`generateDielineWorkflow`).
+- [x] **Pre-Flight: Tooling Alignment & Tailwind CSS v4 Migration** — *Completed*
+  - Upgraded storefront to Tailwind CSS v4 (`@tailwindcss/vite` + `@theme` in `style.css`), removing legacy `tailwind.config.js` and `postcss.config.js`.
+  - Sanitized 8 agent skills to eliminate stale PHP/Laravel/Apex references; synchronized `.cursor/mcp.json` with `.mcp.json`.
+  - Full multi-viewport visual regression sweep passed across Desktop, Laptop, Tablet, Mobile (0 console errors).
 - [ ] **Milestone 3: AI Scene Synthesis & Dedication Engine** — ⏳ *Current Focus (Session 3)*
   - Posed couple/family hugging illustration generator for box side panel and trading cards.
   - Contextual dedication copy generator.
-- [ ] **Milestone 4: Storefront Customizer Wizard** — *Pending (Session 4)*
+- [ ] **M4-Prep: Storefront Environment & Next.js Debris Cleanup** — *Pending (Pre-M4)*
+  - Delete stale Next.js `.eslintrc.json`, rename `NEXT_PUBLIC_*` $\rightarrow$ `VITE_*` in `.env.local` and compose, clean `turbo.json` outputs and `pnpm.overrides`.
+- [ ] **Milestone 4: Storefront Customizer Wizard & Live Commerce** — *Pending (Session 4)*
   - Interactive 8-step wizard with live 3D dieline preview, photo cropper, filament selector, and cart integration.
-- [ ] **Milestone 5: Admin Production Dashboard & Verification Sweep** — *Pending (Session 5)*
+  - Dynamic Medusa JS SDK wiring to live catalog routes (`/store/customizer/*`).
+  - Cross-module link `CustomOrderSpec ↔ LineItem` in `apps/backend/src/links/`.
+  - Vitest test suite for storefront stores and composables.
+- [ ] **Milestone 5: Admin Production Dashboard & Full Production Hardening** — *Pending (Session 5)*
   - Medusa Admin manufacturing hub: 3D printing filament BOM generator, photo ZIP pack, print dieline downloads.
+  - Production Nginx static SPA serving (`docker/nginx/default.prod.conf` with `try_files`) and Dockerfile multi-stage pruning (`npm prune --omit=dev`).
+  - Container healthchecks for `app` and `web`.
+  - GitHub Actions CI/CD workflows (`ci.yml` and `deploy.yml`).
+  - SVG storage migration to Medusa File Module / S3.
 
 ---
 
@@ -88,6 +101,24 @@
   - Implemented exact 15° bevel trigonometry on flaps ($dx = 35 \cdot \tan 15^\circ \approx 9.38\text{mm}$, $dy = 15 \cdot \tan 15^\circ \approx 4.02\text{mm}$) for clean die-cutting.
   - Ensured all service methods are async and step IDs conform strictly to `@medusajs/eslint-plugin` rules.
 
+### Pre-Flight: Tooling Alignment & Tailwind CSS v4 Migration
+- **Files Modified/Added**:
+  - `apps/storefront/package.json`: Replaced `tailwindcss@^3.4.17`, `autoprefixer`, and `postcss` with `@tailwindcss/vite` and `tailwindcss@^4.0.0`.
+  - `apps/storefront/vite.config.ts`: Registered `@tailwindcss/vite` plugin.
+  - `apps/storefront/src/style.css`: Replaced legacy directives with `@import "tailwindcss";` and `@theme` token definitions (`meltia-gold`, `meltia-navy`, Cinzel, Plus Jakarta Sans).
+  - Deleted: `apps/storefront/tailwind.config.js` and `apps/storefront/postcss.config.js`.
+  - Sanitized Skills: `tailwindcss-development`, `bug-reproduction-protocol`, `responsive-container-queries`, `containerized-environment-orchestrator`, `milestone-task-orchestrator`, `i18n-localization-workflow`, `instructions-hygiene`, `b2b-saas-craft`, `tiered-testing-pyramid`.
+  - `.cursor/mcp.json`: Mirrored `.mcp.json` with `codegraph` and `medusa` HTTP MCP.
+  - `docs/ARCHITECTURE.md`: Synchronized documentation with Tailwind v4 and `.mjs` script references.
+- **Verification Receipts**:
+  - `vue-tsc -b && vite build`: Succeeded in 5.41s (`dist/assets/index-Cbe_JWW3.css` 34.61 kB).
+  - `npm run test:unit`: 4 test suites passed, 20 tests passed total.
+  - Playwright visual capture (`scripts/capture-visuals.cjs`): 16 full-page screenshots captured across 4 viewports with 0 console errors.
+  - `./scripts/check-agent-readiness.sh`: Passed with 100% OK.
+- **Decisions Made**:
+  - Adopted Tailwind CSS v4 immediately due to small footprint (~500 lines of template markup), avoiding technical debt and throwaway v3 skill rules.
+  - Defined design tokens directly in CSS `@theme` block, eliminating two configuration files.
+
 ---
 
 ## 4. Active Task: Milestone 3 (AI Scene Synthesis & Dedication Engine)
@@ -114,8 +145,15 @@
 - **DML Relations**: In Medusa v2, child entities in `model.hasMany` need inverse `model.belongsTo` on the child model pointing back to parent with `{ mappedBy: "figures" }`.
 - **Medusa Service Methods**: Public methods on Medusa service classes must be `async` (or return a `Promise`) to comply with `@medusajs/service-methods-must-be-async`.
 - **Workflow Step IDs**: Step IDs passed to `createStep` must match kebab-case of the variable name without trailing `-step` suffix (e.g. `createStep("resolve-dieline-spec", ...)` for `resolveDielineSpecStep`).
+- **Monorepo Dual Vite Types**: Cross-workspace type collision between Vite versions can be resolved by type casting plugins in `vite.config.ts`.
 
 ---
 
 ## 6. Technical Debt & Deferred Refactors
-- *None.*
+- **Deferred to Milestone 5**:
+  - Migrate SVG storage from DB string columns to Medusa File Module / S3.
+  - Update `medusa-config.ts` from `module.exports` to `export default`.
+  - Update `jest.config.js` to import `loadEnv` from `@medusajs/framework/utils`.
+  - Decouple `i18n.unit.spec.ts` from reading storefront files directly.
+  - Implement `docker/nginx/default.prod.conf` for static SPA serving in production.
+

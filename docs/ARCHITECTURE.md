@@ -58,14 +58,14 @@ The storefront originally contemplated Next.js 15 App Router. That architecture 
 - **Routing**: Vue Router 4 (HTML5 history mode)
   - Strict English route paths and link names: `/` (`home`), `/customizer` (`customizer`), `/how-it-works` (`how-it-works`).
   - Cross-page hash scrolling: delayed async `scrollBehavior` resolving target `#how-it-works` from anywhere in the app.
-- **Styling**: Tailwind CSS with container queries (`@container`)
+- **Styling**: Tailwind CSS v4 (`@tailwindcss/vite`) with container queries (`@container`) and CSS-first `@theme` design tokens
 - **Icons**: Lucide Icons (`lucide-vue-next`)
 - **Commerce Client**: `@medusajs/js-sdk` (configured with `publishableKey`)
 - **Internationalization (i18n)**:
   - Zero-bloat composable architecture (`useI18n`) with dual-sync (URL `?lang=es` + `localStorage` persistence).
   - Single-key `$t('Literal Key')` format with symmetrical dictionaries (`apps/storefront/src/lang/en.json`, `es.json`).
   - Rich slot token interpolation component (`<I18nT>`).
-  - Automated AST/regex extraction and CI symmetry verification script (`scripts/extract-t-keys.js`).
+  - Automated AST/regex extraction and CI symmetry verification script (`scripts/extract-t-keys.mjs`).
 
 ---
 

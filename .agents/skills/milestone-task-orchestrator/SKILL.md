@@ -3,7 +3,7 @@ name: milestone-task-orchestrator
 description: "Orchestrates complex features, issues, and large refactors by decomposing them into bounded, non-breaking milestones (50-80 steps max) executed sequentially across fresh conversations with zero-loss shared tracker synchronization. Activates whenever starting a new feature, issue, or refactor, or when continuing an existing milestone tracker."
 license: MIT
 metadata:
-  author: apex
+  author: meltia
 ---
 
 # Milestone Task Orchestrator
@@ -66,7 +66,7 @@ Every discovered defect, user feedback item, and architectural debt item must fo
 | Category | Definition | Resolution Timing | Action in Tracker |
 |---|---|---|---|
 | **Active Milestone Regression / Defect** | Visual clipping, layout overflow, broken button, or styling mismatch in active scope. | **Immediate (Same Session)** | Add to Section 4 (*Acceptance Criteria*). Must pass before milestone completion. |
-| **Cross-Cutting / Shared Refactor** | Refactoring shared components across multiple views (e.g. `LiveClockBadge.vue` in Dashboard & Calendar). | **Sub-Milestone Insertion** | Insert as `Milestone X.1` or expand Section 1 Roadmap. |
+| **Cross-Cutting / Shared Refactor** | Refactoring shared components across multiple views (e.g. `Navbar.vue` or `Box3DPreview.vue`). | **Sub-Milestone Insertion** | Insert as `Milestone X.1` or expand Section 1 Roadmap. |
 | **Discovered Quirk / Framework Edge-Case** | Upstream behavior, CSS containment quirk, or browser oddity. | **Documented & Guarded** | Log in Section 5 (*Discovered Quirks*) with defensive test assertion. |
 | **Deferred Technical Debt** | Non-critical cleanup, secondary documentation, or legacy deprecation. | **Final Hardening Milestone (Milestone $N$)** | Log in Section 6 (*Technical Debt*). **MUST be resolved in Milestone $N$ before PR creation**. |
 
@@ -82,7 +82,7 @@ flowchart TD
     A[New Issue / Refactor Request] --> B[Analyze Scope & Pre-Flight Decompose]
     B --> C[Initialize .github/issues/tracker_slug.md]
     C --> D[Execute Milestone 1 within Step Budget]
-    D --> E[Verify Tests & Pint Formatting]
+    D --> E[Verify Tests & ESLint]
     E --> F[Update Tracker with Milestone Receipts]
     F --> G[Suggest 50/72 Git Commit Message]
     G --> H[Output Next-Session Startup Prompt]
@@ -131,8 +131,8 @@ When starting a new issue, initialize `.github/issues/tracker_<issue_slug>.md` u
 - **Commit**: `<commit-hash>` — `<commit-subject>`
 - **Files Modified/Added**: `<list of files>`
 - **Verification Receipts**:
-  - Pest: `<test_file>` (X passed)
-  - Vitest: `<test_file>` (X passed)
+  - Jest: `<test_file>` (X passed)
+  - Playwright: `<test_file>` (X passed)
 - **Decisions Made**: <Specific architectural decisions>
 
 ---
@@ -148,8 +148,8 @@ When starting a new issue, initialize `.github/issues/tracker_<issue_slug>.md` u
   1. <Criterion 1>
   2. <Criterion 2>
 - **Verification Commands**:
-  - `docker compose exec -T workspace php artisan test <path> --compact`
   - `docker compose exec -T workspace npm run test:unit <path>`
+  - `docker compose exec -T workspace bash -c "cd /app/apps/backend && npm run lint"`
 
 ---
 

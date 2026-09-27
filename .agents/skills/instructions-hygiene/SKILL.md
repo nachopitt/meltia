@@ -3,7 +3,7 @@ name: instructions-hygiene
 description: "Audits repository custom instructions (AGENTS.md, copilot-instructions.md, CLAUDE.md, and skills) for context efficiency, bloat, conflicting directives, ghost tools, and obsolete workarounds using the Keep/Remove/Move/Verify framework. Activates on instruction review, audit, prompt hygiene requests, or context optimization."
 license: MIT
 metadata:
-  author: apex
+  author: meltia
 ---
 
 # Instructions Hygiene & Context Engineering Skill
@@ -28,12 +28,12 @@ Activate this skill when:
 
 Evaluate every instruction against this 4-action matrix:
 
-| Action | Decision Criteria | Examples in Apex |
+| Action | Decision Criteria | Examples in Meltia |
 | :--- | :--- | :--- |
-| **KEEP** | Non-obvious local domain facts, authoritative validation commands, choices codebase cannot settle, hard operational constraints. | • Docker container execution (`workspace`, `playwright`)<br>• Team timezone scoping (`team.timezone`)<br>• Mandatory `$t()` string wrapping |
-| **REMOVE** | Generic coding advice, exhaustive file trees, rules enforced automatically by linters/compilers, ghost tools, emotional coaxing, obsolete workarounds. | • *"Write clean, maintainable code"*<br>• Non-existent MCP tools (`search-docs`, `database-query`)<br>• *"Think step by step"* |
-| **MOVE** | Valid guidance that belongs in path-specific files or linked domain architecture documentation rather than global prompts. | • Detailed clinical use cases $\rightarrow$ `docs/use_cases/`<br>• In-depth database schemas $\rightarrow$ `DATABASE_WORKFLOW.md`<br>• Deep i18n workflows $\rightarrow$ `docs/architecture/` |
-| **VERIFY** | Commands, versions, ports, and SDK requirements that may have drifted from actual repository state. | • Node / PHP version numbers<br>• Docker compose service names and port mappings<br>• Test filter flags (`--compact`) |
+| **KEEP** | Non-obvious local domain facts, authoritative validation commands, choices codebase cannot settle, hard operational constraints. | • Docker container execution (`workspace`, `playwright`)<br>• Mandatory `-T` flag on all exec commands<br>• Mandatory `$t()` string wrapping & key symmetry |
+| **REMOVE** | Generic coding advice, exhaustive file trees, rules enforced automatically by linters/compilers, ghost tools, emotional coaxing, obsolete workarounds. | • *"Write clean, maintainable code"*<br>• Non-existent MCP tools (`search-docs`, `database-query`)<br>• Stale framework references from previous templates |
+| **MOVE** | Valid guidance that belongs in path-specific files or linked domain architecture documentation rather than global prompts. | • Product specifications $\rightarrow$ `docs/REQUIREMENTS.md`<br>• In-depth database schemas $\rightarrow$ `docs/DATABASE.md`<br>• Detailed testing pyramids $\rightarrow$ `docs/TESTING.md` |
+| **VERIFY** | Commands, versions, ports, and SDK requirements that may have drifted from actual repository state. | • Node / Medusa version numbers<br>• Docker compose service names and port mappings<br>• Test commands and runner options |
 
 ---
 
@@ -54,21 +54,21 @@ flowchart TD
 Identify all active instruction files across the repository:
 - **Project Canonical Rules**: `.agents/AGENTS.md` and `.github/copilot-instructions.md` (must be byte-for-byte synced).
 - **Upstream Framework Scaffolding**: `AGENTS.md`, `CLAUDE.md`, and vendor skills (`.agents/skills/**`).
-- **Domain Guides**: `ARCHITECTURE.md`, `TESTING.md`, `DEPLOYMENT.md`, `DATABASE_WORKFLOW.md`.
+- **Domain Guides**: `ARCHITECTURE.md`, `TESTING.md`, `DEPLOYMENT.md`, `DATABASE.md`.
 
 ### Step 2: Upstream vs. Local Boundary Check
-- Verify that upstream framework files (e.g. Laravel Boost scaffolding) remain distinct from custom project invariants.
+- Verify that upstream framework starter templates remain distinct from custom project invariants.
 - Ensure the **Precedence Notice** header is intact at the top of upstream files, directing agents to `.agents/AGENTS.md`.
 
 ### Step 3: Ghost Tool & Dead Reference Scan
 - Inspect `<mcp_servers>` available in the current environment.
-- Flag any instructions mandating tools that do not exist (e.g. requiring `search-docs` or `database-query` when only `codegraph` and `context-mode` are active).
+- Flag any instructions mandating tools that do not exist (e.g. requiring `search-docs` or `database-query` when only `codegraph` and `medusa` are active).
 
 ### Step 4: Contradiction & Scope Analysis
 Scan for contradictory directives across active files:
 - **Host vs Container**: Does any file instruct running commands directly on host when Rule #1 requires Docker?
-- **Testing Frameworks**: Does any file reference deprecated or unused test runners (e.g. Dusk in `tests/Browser/`) when the project standard is Playwright in `e2e/`?
-- **Viewports & Breakpoints**: Are viewport lists consistent across `playwright.config.ts`, `TESTING.md`, and `.agents/AGENTS.md`?
+- **Testing Frameworks**: Does any file reference deprecated or unused test runners when the project standard is Jest and Playwright?
+- **Viewports & Breakpoints**: Are viewport lists consistent across `capture-visuals.cjs`, `TESTING.md`, and `.agents/AGENTS.md`?
 
 ### Step 5: Attention Budget & Signal-to-Noise Scoring
 - Calculate rough line count and token weight of instruction files.

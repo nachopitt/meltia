@@ -63,7 +63,7 @@
    - **Tiered Verification & Test Matrix**: [`tiered-testing-pyramid`](.agents/skills/tiered-testing-pyramid/SKILL.md) — Tier 0 docs fast-path, Tier 1 unit isolation (`npm run test:unit`), Tier 2 module & HTTP integration suites, Tier 3 full sweep.
    - **Interactive Browser Testing**: [`playwright-cli`](.agents/skills/playwright-cli/SKILL.md) — Browser automation inside the `playwright` Docker container.
    - **Bug Reproduction & Diagnostics**: [`bug-reproduction-protocol`](.agents/skills/bug-reproduction-protocol/SKILL.md) — 5-step test-first reproduction loop and tool matching.
-   - **E-Commerce & High-Craft UI**: [`b2b-saas-craft`](.agents/skills/b2b-saas-craft/SKILL.md) — High-density product tables, checkout flows, semantic tokens, tabular figures.
+   - **E-Commerce & High-Craft UI**: [`high-craft-ui`](.agents/skills/high-craft-ui/SKILL.md) — High-density product tables, checkout flows, semantic tokens, tabular figures.
    - **Responsive Layouts & Components**: [`responsive-container-queries`](.agents/skills/responsive-container-queries/SKILL.md) & [`tailwindcss-development`](.agents/skills/tailwindcss-development/SKILL.md) — `@container` queries, multi-viewport layout validation.
    - **Milestone Orchestration**: [`milestone-task-orchestrator`](.agents/skills/milestone-task-orchestrator/SKILL.md) — 30–50 step budgets, tracker receipts, single-milestone bounded handoffs.
    - **Git Hygiene & Commit Limits**: [`git-commit-discipline`](.agents/skills/git-commit-discipline/SKILL.md) — User staging ownership, hard $\le 50$ char subject formula, $\le 72$ body wrapping, zero CLI command form suggestions.

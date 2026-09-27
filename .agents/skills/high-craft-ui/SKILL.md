@@ -1,5 +1,5 @@
 ---
-name: b2b-saas-craft
+name: high-craft-ui
 description: "Enforces high-craft frontend design standards: data-dense layouts, anti-AI-slop heuristics, tabular typography, semantic color tokens, container queries, and instant interactions. Activates when building or modifying Vue templates, tables, forms, metric dashboards, or UI components."
 license: MIT
 metadata:

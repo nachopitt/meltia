@@ -107,7 +107,7 @@
   - `apps/storefront/vite.config.ts`: Registered `@tailwindcss/vite` plugin.
   - `apps/storefront/src/style.css`: Replaced legacy directives with `@import "tailwindcss";` and `@theme` token definitions (`meltia-gold`, `meltia-navy`, Cinzel, Plus Jakarta Sans).
   - Deleted: `apps/storefront/tailwind.config.js` and `apps/storefront/postcss.config.js`.
-  - Sanitized Skills: `tailwindcss-development`, `bug-reproduction-protocol`, `responsive-container-queries`, `containerized-environment-orchestrator`, `milestone-task-orchestrator`, `i18n-localization-workflow`, `instructions-hygiene`, `b2b-saas-craft`, `tiered-testing-pyramid`.
+  - Sanitized Skills: `tailwindcss-development`, `bug-reproduction-protocol`, `responsive-container-queries`, `containerized-environment-orchestrator`, `milestone-task-orchestrator`, `i18n-localization-workflow`, `instructions-hygiene`, `high-craft-ui`, `tiered-testing-pyramid`.
   - `.cursor/mcp.json`: Mirrored `.mcp.json` with `codegraph` and `medusa` HTTP MCP.
   - `docs/ARCHITECTURE.md`: Synchronized documentation with Tailwind v4 and `.mjs` script references.
 - **Verification Receipts**:

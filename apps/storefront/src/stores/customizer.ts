@@ -50,9 +50,9 @@ export const useCustomizerStore = defineStore("customizer", () => {
   const backPanelMode = ref<"roster_grid" | "dual_showcase">("dual_showcase")
 
   // Step 5: Dedication Letter
-  const dedicationHeadline = ref("Felices 28 mi amor")
+  const dedicationHeadline = ref("Happy 28th My Love")
   const dedicationBody = ref(
-    "Hoy celebro la maravillosa persona que eres y agradezco a la vida por permitirme coincidir y compartir contigo parte de este hermoso camino. Deseo que esta nueva vuelta al sol llegue llena de alegrías, aventuras y momentos que hagan sonreír a tu corazón. Te amo mi amor."
+    "Today I celebrate the wonderful person you are and thank life for allowing me to cross paths and share part of this beautiful journey with you. May this new trip around the sun be filled with joy, adventures, and moments that make your heart smile. I love you."
   )
 
   // Step 6: AI Generated Scene
@@ -81,7 +81,7 @@ export const useCustomizerStore = defineStore("customizer", () => {
 
   function addRosterCharacter(category: "man" | "woman" | "boy" | "girl" = "boy") {
     rosterCharacters.value.push({
-      name: `Personaje ${rosterCharacters.value.length + 2}`,
+      name: `Companion ${rosterCharacters.value.length + 2}`,
       category,
       bodyCode: category === "man" ? "MAN_CASUAL_02" : "BOY_CASUAL_01",
       skinFilament: "PEACH_01",

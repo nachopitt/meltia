@@ -163,7 +163,7 @@ export class TradingCardCompositor {
 
     <!-- Brand Logo at Bottom -->
     <text x="${cx}" y="${y + h - 9}" font-family="'Cinzel', Georgia, serif" font-size="4" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${y + h - 6}" font-family="sans-serif" font-size="1.4" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">TARJETA COLECCIONABLE</text>`
+    <text x="${cx}" y="${y + h - 6}" font-family="sans-serif" font-size="1.4" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">COLLECTIBLE TRADING CARD</text>`
   }
 
   private renderCardBackContent(
@@ -200,7 +200,7 @@ export class TradingCardCompositor {
 
     <!-- Brand Logo at Bottom -->
     <text x="${cx}" y="${y + h - 7.5}" font-family="'Cinzel', Georgia, serif" font-size="3.6" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${y + h - 4.8}" font-family="sans-serif" font-size="1.3" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${y + h - 4.8}" font-family="sans-serif" font-size="1.3" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">ETERNAL MOMENTS</text>`
   }
 
   private renderParchmentDedication(
@@ -210,11 +210,11 @@ export class TradingCardCompositor {
     pW: number,
     colors: ThemeColors
   ): string {
-    const headline = escapeXml(spec.dedicationHeadline || "Para Ti Con Todo Mi Amor")
+    const headline = escapeXml(spec.dedicationHeadline || "To You With All My Love")
     const body =
       spec.dedicationBody ||
-      "Cada instante a tu lado se convierte en un recuerdo eterno. Gracias por compartir tu vida, tus sueños y tu luz conmigo hoy y siempre."
-    const signature = escapeXml(spec.dedicationSignature || "Con todo mi amor")
+      "Every moment by your side turns into an eternal memory. Thank you for sharing your life, your dreams, and your light with me today and always."
+    const signature = escapeXml(spec.dedicationSignature || "With all my love")
     const bodyLines = wrapText(body, 26)
 
     return `<!-- Headline with Heart -->
@@ -245,23 +245,23 @@ export class TradingCardCompositor {
     colors: ThemeColors
   ): string {
     const title = escapeXml(spec.collectionTitle || "MELTIA SERIES")
-    const character = escapeXml(spec.mainCharacterName || "Figura Original")
+    const character = escapeXml(spec.mainCharacterName || "Original Figure")
 
     return `<!-- Collector Certificate of Authenticity -->
-    <text x="${cx}" y="${startY + 6.5}" font-family="Georgia, serif" font-size="2.8" font-weight="bold" fill="#3a2012" text-anchor="middle" letter-spacing="0.5">PIEZA COLECCIONABLE</text>
-    <text x="${cx}" y="${startY + 10}" font-family="sans-serif" font-size="1.5" fill="#78350f" text-anchor="middle">EDICIÓN EXCLUSIVA A MEDIDA</text>
+    <text x="${cx}" y="${startY + 6.5}" font-family="Georgia, serif" font-size="2.8" font-weight="bold" fill="#3a2012" text-anchor="middle" letter-spacing="0.5">AUTHENTIC COLLECTIBLE</text>
+    <text x="${cx}" y="${startY + 10}" font-family="sans-serif" font-size="1.5" fill="#78350f" text-anchor="middle">EXCLUSIVE BESPOKE EDITION</text>
     <line x1="${cx - 18}" y1="${startY + 12}" x2="${cx + 18}" y2="${startY + 12}" stroke="#b8860b" stroke-width="0.3" />
 
-    <text x="${cx}" y="${startY + 18}" font-family="Georgia, serif" font-size="2.1" font-weight="bold" fill="#3a2012" text-anchor="middle">Colección: ${title}</text>
-    <text x="${cx}" y="${startY + 23}" font-family="Georgia, serif" font-size="2" fill="#4a3525" text-anchor="middle">Personaje: ${character}</text>
-    <text x="${cx}" y="${startY + 28}" font-family="sans-serif" font-size="1.7" fill="#666666" text-anchor="middle">Serie 1 / 1 &bull; Impresión FDM Artesanal</text>
+    <text x="${cx}" y="${startY + 18}" font-family="Georgia, serif" font-size="2.1" font-weight="bold" fill="#3a2012" text-anchor="middle">Collection: ${title}</text>
+    <text x="${cx}" y="${startY + 23}" font-family="Georgia, serif" font-size="2" fill="#4a3525" text-anchor="middle">Character: ${character}</text>
+    <text x="${cx}" y="${startY + 28}" font-family="sans-serif" font-size="1.7" fill="#666666" text-anchor="middle">Series 1 of 1 &bull; Artisanal FDM 3D Craft</text>
 
     <!-- Vintage Note Lines for Handwritten Message -->
     <line x1="${cx - 20}" y1="${startY + 36}" x2="${cx + 20}" y2="${startY + 36}" stroke="#d6c7b2" stroke-width="0.4" stroke-dasharray="1,1" />
     <line x1="${cx - 20}" y1="${startY + 42}" x2="${cx + 20}" y2="${startY + 42}" stroke="#d6c7b2" stroke-width="0.4" stroke-dasharray="1,1" />
     <line x1="${cx - 20}" y1="${startY + 48}" x2="${cx + 20}" y2="${startY + 48}" stroke="#d6c7b2" stroke-width="0.4" stroke-dasharray="1,1" />
     <line x1="${cx - 20}" y1="${startY + 54}" x2="${cx + 20}" y2="${startY + 54}" stroke="#d6c7b2" stroke-width="0.4" stroke-dasharray="1,1" />
-    <text x="${cx}" y="${startY + 60}" font-family="Georgia, serif" font-size="1.6" font-style="italic" fill="#8c7355" text-anchor="middle">Espacio para dedicatoria manuscrita</text>`
+    <text x="${cx}" y="${startY + 60}" font-family="Georgia, serif" font-size="1.6" font-style="italic" fill="#8c7355" text-anchor="middle">Space for handwritten dedication</text>`
   }
 
   private renderCardFrame(x: number, y: number, w: number, h: number, gold: string): string {

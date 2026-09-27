@@ -51,11 +51,13 @@ The storefront originally contemplated Next.js 15 App Router. That architecture 
 2. **Docker Bind-Mount Performance**: Turbopack and Webpack JIT file watching in Docker volume mounts caused 8–12 second cold-starts per page load and severe CPU thrashing. Vite 6 boots in **566ms** with sub-100ms Hot Module Replacement (HMR).
 3. **Decoupled Headless Consumption**: The storefront communicates directly with Medusa via `@medusajs/js-sdk`. Authentication, cart state, regions, and collections resolve over standard REST endpoints without requiring SSR proxy layers.
 
-### Frontend Tech Stack
+### Frontend Tech Stack & Routing
 - **Framework**: Vue 3.5 (Composition API, `<script setup>`)
 - **Build Tool**: Vite 6
 - **State Management**: Pinia (`useCustomizerStore`)
 - **Routing**: Vue Router 4 (HTML5 history mode)
+  - Strict English route paths and link names: `/` (`home`), `/customizer` (`customizer`), `/how-it-works` (`how-it-works`).
+  - Cross-page hash scrolling: delayed async `scrollBehavior` resolving target `#how-it-works` from anywhere in the app.
 - **Styling**: Tailwind CSS with container queries (`@container`)
 - **Icons**: Lucide Icons (`lucide-vue-next`)
 - **Commerce Client**: `@medusajs/js-sdk` (configured with `publishableKey`)

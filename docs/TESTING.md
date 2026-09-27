@@ -45,6 +45,10 @@ docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit
 # Packaging Dieline & Companion Trading Card Compositor tests (Milestone 2)
 docker compose exec -T workspace bash -c "cd /app/apps/backend && TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest src/modules/blindbox/__tests__/dieline-compositor.unit.spec.ts"
 ```
+The dieline compositor unit suite validates:
+- Folding box geometry (80x120x60mm net with 15° glue tab bevels and locking tabs).
+- English print legends and typography (`GLUE TAB`, `Cut Line`, `Fold Crease`, `ETERNAL MOMENTS`).
+- 2-up trading card dimensions (63x88mm companion cards) with dual-sided English authenticity certificates.
 
 ### Tier 2: Module & HTTP Integration
 Runs against the live containerized PostgreSQL and Redis instances:

@@ -17,15 +17,15 @@ import { Sparkles, ShoppingBag } from "lucide-vue-next"
             MELTIA
           </span>
           <span class="text-[9px] tracking-widest uppercase text-amber-500/80 -mt-1 font-medium">
-            Instantes Eternos
+            Eternal Moments
           </span>
         </div>
       </RouterLink>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
-        <RouterLink to="/" class="hover:text-neutral-100 transition-colors">Inicio</RouterLink>
-        <RouterLink to="/customizer" class="hover:text-neutral-100 transition-colors">Catálogo de Cajas</RouterLink>
-        <a href="#proceso" class="hover:text-neutral-100 transition-colors">Cómo Funciona</a>
+        <RouterLink to="/" class="hover:text-neutral-100 transition-colors">Home</RouterLink>
+        <RouterLink to="/customizer" class="hover:text-neutral-100 transition-colors">Customizer</RouterLink>
+        <RouterLink :to="{ path: '/', hash: '#how-it-works' }" class="hover:text-neutral-100 transition-colors">How It Works</RouterLink>
       </nav>
 
       <div class="flex items-center gap-4">
@@ -34,10 +34,10 @@ import { Sparkles, ShoppingBag } from "lucide-vue-next"
           class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-amber-400 to-amber-300 rounded-full hover:from-amber-300 hover:to-amber-200 transition-all shadow-md shadow-amber-500/20 active:scale-95"
         >
           <Sparkles class="w-3.5 h-3.5" />
-          Diseñar Blind Box
+          Design Blind Box
         </RouterLink>
 
-        <button class="relative p-2 text-neutral-400 hover:text-neutral-100 transition-colors">
+        <button class="relative p-2 text-neutral-400 hover:text-neutral-100 transition-colors" aria-label="Cart">
           <ShoppingBag class="w-5 h-5" />
           <span class="absolute top-1 right-1 w-2 h-2 bg-amber-400 rounded-full"></span>
         </button>

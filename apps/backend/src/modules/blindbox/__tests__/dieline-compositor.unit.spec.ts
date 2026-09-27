@@ -89,7 +89,7 @@ describe("Milestone 2: Dieline & Asset Generator Engine", () => {
       expect(svg).toContain('id="fold-creases"')
 
       // 15° bevel glue tab and dust flaps
-      expect(svg).toContain("GLUE TAB / PESTAÑA")
+      expect(svg).toContain("GLUE TAB")
       expect(svg).toContain("305 94.02") // glue tab top bevel: G * tan(15°) = 15 * 0.2679 ≈ 4.02 -> y = 90 + 4.02 = 94.02
       expect(svg).toContain("19.38") // dust flap bevel: H_flap * tan(15°) = 35 * 0.2679 ≈ 9.38 -> x = 10 + 9.38 = 19.38
 
@@ -99,8 +99,8 @@ describe("Milestone 2: Dieline & Asset Generator Engine", () => {
 
       // Registration marks and print legend
       expect(svg).toContain('id="print-legend"')
-      expect(svg).toContain("Cut Line (Corte)")
-      expect(svg).toContain("Fold Crease (Pliegue)")
+      expect(svg).toContain("Cut Line")
+      expect(svg).toContain("Fold Crease")
       expect(svg).toContain("Width: 80mm | Height: 120mm | Depth: 60mm | 300 DPI")
     })
 
@@ -126,7 +126,7 @@ describe("Milestone 2: Dieline & Asset Generator Engine", () => {
       expect(svg).toContain("ELIAS")
       expect(svg).toContain("COLLECTIBLE BLIND BOX")
       expect(svg).toContain("Meltia")
-      expect(svg).toContain("INSTANTES ETERNOS")
+      expect(svg).toContain("ETERNAL MOMENTS")
 
       // Back panel 6-figure roster
       expect(svg).toContain("SERIES ROSTER")
@@ -205,7 +205,7 @@ describe("Milestone 2: Dieline & Asset Generator Engine", () => {
 
       // Artwork elements
       expect(sheetSvg).toContain("Agustín")
-      expect(sheetSvg).toContain("TARJETA COLECCIONABLE")
+      expect(sheetSvg).toContain("COLLECTIBLE TRADING CARD")
       expect(sheetSvg).toContain("Felices 28 mi amor")
       expect(sheetSvg).toContain("Te amo mi amor")
       expect(sheetSvg).toContain("Meltia")
@@ -229,8 +229,8 @@ describe("Milestone 2: Dieline & Asset Generator Engine", () => {
       expect(backSvg).toContain('viewBox="0 0 63 88"')
       expect(backSvg).toContain('width="63mm"')
       expect(backSvg).toContain('height="88mm"')
-      expect(backSvg).toContain("PIEZA COLECCIONABLE")
-      expect(backSvg).toContain("EDICIÓN EXCLUSIVA A MEDIDA")
+      expect(backSvg).toContain("AUTHENTIC COLLECTIBLE")
+      expect(backSvg).toContain("EXCLUSIVE BESPOKE EDITION")
     })
   })
 

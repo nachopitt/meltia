@@ -330,7 +330,7 @@ export class DielineCompositor {
     <rect x="${g.xFront}" y="${g.yBottomLid}" width="${g.W}" height="${g.T}" fill="${colors.primary}" rx="6" />
     <!-- Glue tab hatch pattern -->
     <path d="M ${g.xGlue} ${g.yBeltTop} L ${g.xEnd} ${g.yBeltTop + g.glueBevelDy} L ${g.xEnd} ${g.yBeltBottom - g.glueBevelDy} L ${g.xGlue} ${g.yBeltBottom} Z" fill="url(#glue-hatch)" />
-    <text x="${g.xGlue + 7.5}" y="${g.yBeltTop + 60}" font-family="sans-serif" font-size="2.5" fill="#666666" text-anchor="middle" transform="rotate(90 ${g.xGlue + 7.5} ${g.yBeltTop + 60})">GLUE TAB / PESTAÑA</text>
+    <text x="${g.xGlue + 7.5}" y="${g.yBeltTop + 60}" font-family="sans-serif" font-size="2.5" fill="#666666" text-anchor="middle" transform="rotate(90 ${g.xGlue + 7.5} ${g.yBeltTop + 60})">GLUE TAB</text>
     `
 
     // Panel 1: Left Side Panel
@@ -392,7 +392,7 @@ export class DielineCompositor {
 
     <!-- Brand Logo -->
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="5" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">ETERNAL MOMENTS</text>`
   }
 
   private renderTopLid(
@@ -425,7 +425,7 @@ export class DielineCompositor {
     <rect x="${g.xFront}" y="${g.yBeltBottom}" width="${g.W}" height="${g.D}" fill="url(#theme-bg)" />
     ${this.renderOrnateBorder(g.xFront + 3, g.yBeltBottom + 3, g.W - 6, g.D - 6, colors.accent)}
     <text x="${cx}" y="${cy + 1}" font-family="'Cinzel', Georgia, serif" font-size="7" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${cy + 6.5}" font-family="sans-serif" font-size="2.4" fill="${colors.accent}" text-anchor="middle" letter-spacing="1">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${cy + 6.5}" font-family="sans-serif" font-size="2.4" fill="${colors.accent}" text-anchor="middle" letter-spacing="1">ETERNAL MOMENTS</text>`
   }
 
   private renderLeftPanel(
@@ -457,7 +457,7 @@ export class DielineCompositor {
 
     <!-- Meltia Badge -->
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="4" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">ETERNAL MOMENTS</text>`
     }
 
     // Roster Grid: Alternative side character
@@ -467,7 +467,7 @@ export class DielineCompositor {
     <text x="${cx}" y="${g.yBeltTop + 16}" font-family="sans-serif" font-size="2.4" font-weight="bold" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.5">COLLECTIBLE</text>
     ${this.renderChibiPlaceholder(cx, cy + 4, "Chibi Martial", colors)}
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="4" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">ETERNAL MOMENTS</text>`
   }
 
   private renderRightPanel(
@@ -481,11 +481,11 @@ export class DielineCompositor {
 
     if (isDual) {
       // Dedication Letter
-      const headline = escapeXml(spec.dedicationHeadline || "Felices 28 mi amor")
+      const headline = escapeXml(spec.dedicationHeadline || "Happy 28th My Love")
       const body =
         spec.dedicationBody ||
-        "Hoy celebro la maravillosa persona que eres y agradezco a la vida por permitirme coincidir y compartir contigo parte de este hermoso camino. Deseo que esta nueva vuelta al sol llegue llena de alegrías, aventuras y momentos que hagan sonreír a tu corazón."
-      const signature = escapeXml(spec.dedicationSignature || "Te amo mi amor")
+        "Today I celebrate the wonderful person you are and thank life for allowing me to cross paths and share part of this beautiful journey with you. May this new trip around the sun be filled with joy, adventures, and moments that make your heart smile."
+      const signature = escapeXml(spec.dedicationSignature || "With All My Love")
       const bodyLines = wrapText(body, 28)
 
       return `<!-- RIGHT PANEL (DUAL SHOWCASE: DEDICATION LETTER) -->
@@ -517,7 +517,7 @@ export class DielineCompositor {
 
     <!-- Brand Logo -->
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="4" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">ETERNAL MOMENTS</text>`
     }
 
     // Roster: Alternative side character
@@ -527,7 +527,7 @@ export class DielineCompositor {
     <text x="${cx}" y="${g.yBeltTop + 16}" font-family="sans-serif" font-size="2.4" font-weight="bold" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.5">EXCLUSIVE</text>
     ${this.renderChibiPlaceholder(cx, cy + 4, "Chibi Suit", colors)}
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="4" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 8}" font-family="sans-serif" font-size="1.5" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.6">ETERNAL MOMENTS</text>`
   }
 
   private renderBackPanel(
@@ -564,7 +564,7 @@ export class DielineCompositor {
 
     <!-- Brand Logo -->
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="5" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">ETERNAL MOMENTS</text>`
     }
 
     // 6-figure series roster grid (matching reference IMG-20260908-WA0012)
@@ -628,7 +628,7 @@ export class DielineCompositor {
 
     <!-- Brand Logo -->
     <text x="${cx}" y="${g.yBeltBottom - 11}" font-family="'Cinzel', Georgia, serif" font-size="5" font-weight="bold" fill="${colors.text}" text-anchor="middle">Meltia</text>
-    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">INSTANTES ETERNOS</text>`
+    <text x="${cx}" y="${g.yBeltBottom - 7.5}" font-family="sans-serif" font-size="1.8" fill="${colors.accent}" text-anchor="middle" letter-spacing="0.8">ETERNAL MOMENTS</text>`
   }
 
   private renderOrnateBorder(x: number, y: number, w: number, h: number, gold: string): string {
@@ -725,9 +725,9 @@ export class DielineCompositor {
 
     <!-- Color Legend Key -->
     <line x1="${g.M + 4}" y1="${g.totalHeight - 3}" x2="${g.M + 12}" y2="${g.totalHeight - 3}" stroke="red" stroke-width="0.8" />
-    <text x="${g.M + 14}" y="${g.totalHeight - 2.2}" font-family="sans-serif" font-size="2.2" fill="#333333">Cut Line (Corte)</text>
+    <text x="${g.M + 14}" y="${g.totalHeight - 2.2}" font-family="sans-serif" font-size="2.2" fill="#333333">Cut Line</text>
     <line x1="${g.M + 44}" y1="${g.totalHeight - 3}" x2="${g.M + 52}" y2="${g.totalHeight - 3}" stroke="blue" stroke-dasharray="3,2" stroke-width="0.8" />
-    <text x="${g.M + 54}" y="${g.totalHeight - 2.2}" font-family="sans-serif" font-size="2.2" fill="#333333">Fold Crease (Pliegue)</text>
+    <text x="${g.M + 54}" y="${g.totalHeight - 2.2}" font-family="sans-serif" font-size="2.2" fill="#333333">Fold Crease</text>
     <text x="${g.totalWidth - g.M - 4}" y="${g.totalHeight - 2.2}" font-family="sans-serif" font-size="2" fill="#666666" text-anchor="end">Width: ${g.W}mm | Height: ${g.H}mm | Depth: ${g.D}mm | 300 DPI</text>`
   }
 }

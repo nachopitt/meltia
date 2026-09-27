@@ -12,8 +12,8 @@ Extracted from real customer orders and operational specifications (Diana Mora /
 2. **Personalized 6-Panel Folding Blind Box**:
    - High-gloss CMYK printed tuck-box with cut/crease guides and glue flaps.
    - Panels customized with collection title, dedication letter, AI-generated couple/family illustration, and back-panel character roster.
-3. **Double-Sided Collectible Trading Cards (`Tarjetas Coleccionables`)**:
-   - 2-up trading cards matching the box theme, containing mini character art and dedication parchment.
+3. **Double-Sided Collectible Trading Cards**:
+   - 2-up companion trading cards matching the box theme, containing mini character art, dedication parchment, and authentic collectible certificate.
 
 ---
 

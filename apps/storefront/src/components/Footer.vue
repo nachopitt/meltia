@@ -8,17 +8,17 @@ import { Sparkles, Heart } from "lucide-vue-next"
       <div class="flex items-center gap-2">
         <Sparkles class="w-4 h-4 text-amber-400" />
         <span class="font-serif tracking-widest text-neutral-200 font-bold">MELTIA</span>
-        <span class="text-xs text-neutral-500">— Figuras Coleccionables y Blind Boxes Personalizados</span>
+        <span class="text-xs text-neutral-500">— Custom 3D Figures & Collectible Blind Boxes</span>
       </div>
 
       <div class="flex items-center gap-1 text-xs text-neutral-500">
-        Fabricado con
+        Crafted with
         <Heart class="w-3.5 h-3.5 text-rose-500 fill-rose-500 mx-0.5 inline" />
-        en impresión 3D FDM de alta precisión
+        high-precision FDM 3D printing
       </div>
 
       <div class="text-xs text-neutral-600">
-        &copy; {{ new Date().getFullYear() }} Meltia. Todos los derechos reservados.
+        &copy; {{ new Date().getFullYear() }} Meltia. All rights reserved.
       </div>
     </div>
   </footer>

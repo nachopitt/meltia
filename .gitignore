@@ -54,3 +54,7 @@ docker/certs/*
 
 # i18n audit artifacts
 scripts/extracted-t-keys.json
+
+# Engram memory sync artifacts (keep config.json tracked)
+.engram/*
+!.engram/config.json
